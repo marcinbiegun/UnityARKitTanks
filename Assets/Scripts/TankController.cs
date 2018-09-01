@@ -4,27 +4,54 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour {
 
+    public float rotation = 0f;
     public float angle = 0f;
     public float power = 0f;
+    public float rotationDelta = 0f;
+    public float angleDelta = 0f;
+    public float powerDelta = 0f;
     public GameObject barrelObject;
 
     // Use this for initialization
     void Start () {
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        var newRotation = Quaternion.Euler(
-            angle,
+        // Rotate the tank's barrel
+        barrelObject.transform.localRotation = Quaternion.Euler(
+            angle + angleDelta,
             barrelObject.transform.rotation.y,
             barrelObject.transform.rotation.z
         );
-        barrelObject.transform.rotation = newRotation;
-        var newLocalScale = new Vector3(
-            barrelObject.transform.localScale.x,
-            barrelObject.transform.localScale.y,
-            1f + power
+
+        // Scale the tank's barrel
+        barrelObject.transform.localScale = new Vector3(
+            gameObject.transform.localScale.x,
+            gameObject.transform.localScale.y,
+            1f + power + powerDelta
         );
-        barrelObject.transform.localScale = newLocalScale;
+
+        // Rotate the tank
+        gameObject.transform.localRotation = Quaternion.Euler(
+            gameObject.transform.rotation.x,
+            rotation + rotationDelta,
+            gameObject.transform.rotation.z
+        );
+
+    }
+
+    public void ApplyDeltas() {
+        rotation += rotationDelta;
+        angle += angleDelta;
+        power += powerDelta;
+        rotationDelta = 0f;
+        angleDelta = 0f;
+        rotationDelta = 0f;
+    }
+
+    public Transform ShotTransform() {
+        var shotTransform = gameObject.transform;
+        shotTransform.Rotate(angle + angleDelta, 0, 0);
+        return shotTransform;
     }
 }

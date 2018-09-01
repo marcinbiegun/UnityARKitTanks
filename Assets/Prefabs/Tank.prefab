@@ -2062,7 +2062,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1168573738458354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -0.15, z: 0.04}
+  m_LocalPosition: {x: 0.03, y: -0.15, z: 0.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4813193490021200}
@@ -7628,6 +7628,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3930d0d1ad84d46e7819c04f9f6d79eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: 0.09
   angle: 0
   power: 0
+  rotationDelta: 0
+  angleDelta: 0
+  powerDelta: 0
   barrelObject: {fileID: 1611059208120564}

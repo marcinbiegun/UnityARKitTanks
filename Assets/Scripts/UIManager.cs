@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
 {
     public Button debugButton;
     public Button rotationButton;
-    public Button angleButton;
     public Button fireButton;
     //public Button[] spawnerButtons;
     //public Dropdown stageDropdown;
@@ -15,11 +14,13 @@ public class UIManager : MonoBehaviour
     public void Setup()
     {
         debugButton.onClick.AddListener(GameManager.instance.DebugAction);
+        rotationButton.onClick.AddListener(GameManager.instance.Rotate);
+        fireButton.onClick.AddListener(GameManager.instance.Fire);
     }
 
     //public void SetSpawnerButtonState(int index, bool newState)
     //{
-        //spawnerButtons[index].colors = GetButtonColorBlock(newState);
+    //spawnerButtons[index].colors = GetButtonColorBlock(newState);
     //}
 
 

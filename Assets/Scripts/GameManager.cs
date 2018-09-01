@@ -33,22 +33,20 @@ public class GameManager : MonoBehaviour
     void Setup()
     {
         uiManager.Setup();
-    }
-
-    public void DebugAction() {
         tanksManager.CreateTankOnTerrain();
     }
 
+    public void DebugAction() {
+    }
 
-    public void EnterRotationMode() {
+
+    public void Rotate() {
         tanksManager.EnterRotationMode();
     }
 
-    public void EnterAngleMode() {
-    }
 
     public void Fire() {
-        Debug.Log("Fire!");
+        tanksManager.Fire();
     }
 
     void Update()
