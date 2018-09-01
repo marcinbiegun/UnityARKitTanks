@@ -44,12 +44,12 @@ public class GameManager : MonoBehaviour
         tankManager.Fire();
     }
 
-    public void SetTankControlDelta(float rotation, float angle, float power) {
-        tankManager.SetControlDelta(rotation, angle, power);
+    public void SetTargetDelta(Tanks.Target targetDelta) {
+        tankManager.SetTargetDelta(targetDelta);
     }
 
-    public void ApplyTankControlDelta() {
-        tankManager.ApplyControlDelta();
+    public void ApplyTargetDelta() {
+        tankManager.ApplyTargetDelta();
     }
 
     void Update()

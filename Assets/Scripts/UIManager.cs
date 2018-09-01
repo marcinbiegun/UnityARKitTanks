@@ -9,18 +9,16 @@ public class UIManager : MonoBehaviour
     public Text rotationValue;
     public Text angleValue;
     public Text powerValue;
-    //public Button[] spawnerButtons;
-    //public Dropdown stageDropdown;
 
     public void Setup()
     {
         debugButton.onClick.AddListener(GameManager.instance.DebugAction);
     }
 
-    public void DisplayTankAdjustments(float rotation, float angle, float power) {
-        rotationValue.text = rotation.ToString("0.0");
-        angleValue.text = angle.ToString("0.0");
-        powerValue.text = power.ToString("0.0");
+    public void DisplayTarget(Tanks.Target target) {
+        rotationValue.text = target.rotation.ToString("0.0");
+        angleValue.text = target.angle.ToString("0.0");
+        powerValue.text = target.power.ToString("0.0");
     }
 
 }
