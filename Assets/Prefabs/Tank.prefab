@@ -1103,7 +1103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4569040199895838}
-  - component: {fileID: 114619195452201536}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -7617,21 +7616,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1938252012802518}
   m_Mesh: {fileID: 4300182, guid: 9fa2708c0a62146b096173ab0d34e1e2, type: 3}
---- !u!114 &114619195452201536
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1644556486441774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3930d0d1ad84d46e7819c04f9f6d79eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotation: 0.09
-  angle: 0
-  power: 0
-  rotationDelta: 0
-  angleDelta: 0
-  powerDelta: 0
-  barrelObject: {fileID: 1611059208120564}

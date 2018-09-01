@@ -6,39 +6,21 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Button debugButton;
-    public Button rotationButton;
-    public Button fireButton;
+    public Text rotationValue;
+    public Text angleValue;
+    public Text powerValue;
     //public Button[] spawnerButtons;
     //public Dropdown stageDropdown;
 
     public void Setup()
     {
         debugButton.onClick.AddListener(GameManager.instance.DebugAction);
-        rotationButton.onClick.AddListener(GameManager.instance.Rotate);
-        fireButton.onClick.AddListener(GameManager.instance.Fire);
     }
 
-    //public void SetSpawnerButtonState(int index, bool newState)
-    //{
-    //spawnerButtons[index].colors = GetButtonColorBlock(newState);
-    //}
-
-
-    /*
-    ColorBlock GetButtonColorBlock(bool state)
-    {
-        if (state)
-        {
-            return ColorBlock.defaultColorBlock;
-        } else
-        {
-            var disabledColors = ColorBlock.defaultColorBlock;
-            disabledColors.normalColor = Color.gray;
-            disabledColors.highlightedColor = Color.gray;
-            disabledColors.pressedColor = Color.gray;
-            return disabledColors;
-        }
+    public void DisplayTankAdjustments(float rotation, float angle, float power) {
+        rotationValue.text = rotation.ToString("0.0");
+        angleValue.text = angle.ToString("0.0");
+        powerValue.text = power.ToString("0.0");
     }
-    */
 
 }

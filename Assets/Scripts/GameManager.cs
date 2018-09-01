@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public TanksManager tanksManager;
+    public TankManager tankManager;
     public TerrainManager terrainManager;
     public UIManager uiManager;
 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Store reference to other manager intances
-        tanksManager = GetComponent<TanksManager>();
+        tankManager = GetComponent<TankManager>();
         terrainManager = GetComponent<TerrainManager>();
         uiManager = GetComponent<UIManager>();
 
@@ -33,26 +33,27 @@ public class GameManager : MonoBehaviour
     void Setup()
     {
         uiManager.Setup();
-        tanksManager.CreateTankOnTerrain();
+        tankManager.CreateTankOnTerrain();
     }
 
     public void DebugAction() {
+        Debug.Log("Debug action!");
     }
-
-
-    public void Rotate() {
-        tanksManager.EnterRotationMode();
-    }
-
 
     public void Fire() {
-        tanksManager.Fire();
+        tankManager.Fire();
+    }
+
+    public void SetTankControlDelta(float rotation, float angle, float power) {
+        tankManager.SetControlDelta(rotation, angle, power);
+    }
+
+    public void ApplyTankControlDelta() {
+        tankManager.ApplyControlDelta();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("escape"))
-            Application.Quit();
 
     }
 }
