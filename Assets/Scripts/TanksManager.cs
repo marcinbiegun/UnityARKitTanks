@@ -16,7 +16,13 @@ public class TanksManager : MonoBehaviour {
 	}
 
     public void CreateTankOnTerrain() {
+        if (tank != null) {
+            throw new UnityException("Tank is already spawned");
+        }
         var tankPosition = GameManager.instance.terrainManager.RandomPosition();
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
+    }
+
+    public void EnterRotationMode() {
     }
 }

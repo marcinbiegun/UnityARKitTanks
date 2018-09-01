@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Button debugButton;
+    public Button rotationButton;
+    public Button angleButton;
+    public Button fireButton;
     //public Button[] spawnerButtons;
     //public Dropdown stageDropdown;
 
     public void Setup()
     {
-        debugButton.onClick.AddListener(delegate {
-            GameManager.instance.DebugAction();
-        });
+        debugButton.onClick.AddListener(GameManager.instance.DebugAction);
     }
 
     //public void SetSpawnerButtonState(int index, bool newState)

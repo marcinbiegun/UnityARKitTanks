@@ -39,11 +39,16 @@ public class GameManager : MonoBehaviour
         tanksManager.CreateTankOnTerrain();
     }
 
-    public void ToggleTrackState(int index) {
+
+    public void EnterRotationMode() {
+        tanksManager.EnterRotationMode();
     }
 
-    public void ChangeStage(int index)
-    {
+    public void EnterAngleMode() {
+    }
+
+    public void Fire() {
+        Debug.Log("Fire!");
     }
 
     void Update()
