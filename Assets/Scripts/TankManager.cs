@@ -8,6 +8,7 @@ public class TankManager : MonoBehaviour {
     public GameObject projectilePrefab;
     private GameObject tank;
     private GameObject tankBarrel;
+    private GameObject projectileSpawnPoint;
 
     public Tanks.Target target = new Tanks.Target(0f, 0f, 0f);
     public Tanks.Target targetDelta = new Tanks.Target(0f, 0f, 0f);
@@ -28,29 +29,31 @@ public class TankManager : MonoBehaviour {
         }
         var tankPosition = GameManager.instance.terrainManager.RandomPosition();
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
+
         tankBarrel = tank.transform.Find("Barrel").gameObject;
-        if (tankBarrel == null) {
+        if (tankBarrel == null) 
             throw new UnityException("Unable to find tank's barrel");
-        }
 
-        // Colorize tank
-        //foreach (Transform t in tank.transform) {
-        int colorizableLayer = LayerMask.NameToLayer("Colorizable");
-        foreach (Transform t in tank.GetComponentsInChildren<Transform>()) {
-            if (t.gameObject.layer != colorizableLayer)
-                continue;
-            Renderer rend = t.GetComponent<Renderer>();
-            if (rend == null)
-                continue;
-            rend.material = tankMaterial;
-        }
+        projectileSpawnPoint = tank.transform.Find("Barrel/ProjectileSpawnPoint").gameObject;
+        if (projectileSpawnPoint == null)
+            throw new UnityException("Unable to find tank's projectile spawn point");
 
+        ColorizeTank();
     }
 
     public void Fire() {
-        var shotTransform = tankBarrel.transform;
+        var shotTransform = projectileSpawnPoint.transform;
         GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation);
         newProjectile.GetComponent<Rigidbody>().AddForce(shotTransform.forward * target.power * -1000f);
+    }
+
+    public void SetTargetDelta(Tanks.Target newTargetDelta) {
+        targetDelta = newTargetDelta;
+    }
+
+    public void ApplyTargetDelta() {
+        target += targetDelta;
+        targetDelta = new Tanks.Target(0f, 0f, 0f);
     }
 
     void DisplayTargetOnModel() {
@@ -80,13 +83,16 @@ public class TankManager : MonoBehaviour {
         GameManager.instance.uiManager.DisplayTarget(target + targetDelta);
     }
 
-    public void SetTargetDelta(Tanks.Target newTargetDelta) {
-        targetDelta = newTargetDelta;
-    }
-
-    public void ApplyTargetDelta() {
-        target += targetDelta;
-        targetDelta = new Tanks.Target(0f, 0f, 0f);
+    void ColorizeTank() {
+        int colorizableLayer = LayerMask.NameToLayer("Colorizable");
+        foreach (Transform t in tank.GetComponentsInChildren<Transform>()) {
+            if (t.gameObject.layer != colorizableLayer)
+                continue;
+            Renderer rend = t.GetComponent<Renderer>();
+            if (rend == null)
+                continue;
+            rend.material = tankMaterial;
+        }
     }
 
 }

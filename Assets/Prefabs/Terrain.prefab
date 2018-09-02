@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 218423775754556600}
   - component: {fileID: 154294399838553006}
   - component: {fileID: 114047741229063282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ TerrainCollider:
   m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: e9abb28de421e4818b1410da902533b6, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &218423775754556600
 Terrain:
   m_ObjectHideFlags: 1
