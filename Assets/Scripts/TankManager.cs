@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TankManager : MonoBehaviour {
+    public Material tankMaterial;
     public GameObject tankPrefab;
     public GameObject projectilePrefab;
     private GameObject tank;
@@ -31,6 +32,19 @@ public class TankManager : MonoBehaviour {
         if (tankBarrel == null) {
             throw new UnityException("Unable to find tank's barrel");
         }
+
+        // Colorize tank
+        //foreach (Transform t in tank.transform) {
+        int colorizableLayer = LayerMask.NameToLayer("Colorizable");
+        foreach (Transform t in tank.GetComponentsInChildren<Transform>()) {
+            if (t.gameObject.layer != colorizableLayer)
+                continue;
+            Renderer rend = t.GetComponent<Renderer>();
+            if (rend == null)
+                continue;
+            rend.material = tankMaterial;
+        }
+
     }
 
     public void Fire() {

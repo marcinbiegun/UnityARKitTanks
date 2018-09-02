@@ -676,6 +676,7 @@ GameObject:
   - component: {fileID: 872452556}
   - component: {fileID: 872452557}
   - component: {fileID: 872452558}
+  - component: {fileID: 872452559}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -694,7 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20fee3f3b24240bf98a8e1ab9ac371a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankManager: {fileID: 0}
+  tank0Manager: {fileID: 0}
+  tank1Manager: {fileID: 0}
   terrainManager: {fileID: 0}
   uiManager: {fileID: 0}
 --- !u!4 &872452553
@@ -721,18 +723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26714ee90e84946f08e1a3b0368f6918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankPrefab: {fileID: 1644556486441774, guid: 212839eb89ebc4cf593630f4450b37ed, type: 2}
-  projectilePrefab: {fileID: 1467528794019216, guid: 343feac35bb734e12bca7e63494102cd,
-    type: 2}
-  tank: {fileID: 0}
-  rotation: 0
-  angle: 0
-  power: 0
-  rotationDelta: 0
-  angleDelta: 0
-  powerDelta: 0
-  controlMode: 0
-  initialMousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &872452555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +772,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fa26e6ad57454892780819d9b2a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tankMaterial: {fileID: 2100000, guid: c7e7e193cb77e4a4e84d886e3e522173, type: 2}
+  tankPrefab: {fileID: 1644556486441774, guid: 212839eb89ebc4cf593630f4450b37ed, type: 2}
+  projectilePrefab: {fileID: 1467528794019216, guid: 343feac35bb734e12bca7e63494102cd,
+    type: 2}
+--- !u!114 &872452559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872452551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414fa26e6ad57454892780819d9b2a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankMaterial: {fileID: 2100000, guid: cf0544ecf53714c03ab69c686b9d21e8, type: 2}
   tankPrefab: {fileID: 1644556486441774, guid: 212839eb89ebc4cf593630f4450b37ed, type: 2}
   projectilePrefab: {fileID: 1467528794019216, guid: 343feac35bb734e12bca7e63494102cd,
     type: 2}

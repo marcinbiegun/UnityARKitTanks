@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public TankManager tankManager;
+    public TankManager tank0Manager;
+    public TankManager tank1Manager;
     public TerrainManager terrainManager;
     public UIManager uiManager;
 
@@ -22,9 +23,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Store reference to other manager intances
-        tankManager = GetComponent<TankManager>();
         terrainManager = GetComponent<TerrainManager>();
         uiManager = GetComponent<UIManager>();
+
+        // Two tanks managers
+        if (GetComponents<TankManager>().Length != 2) {
+            throw new UnityException("Game<anager must have exactly 2 TankManagers");
+        }
+        tank0Manager = GetComponents<TankManager>()[0];
+        tank1Manager = GetComponents<TankManager>()[1];
 
         // Let other managers do the setup
         Setup();
@@ -33,7 +40,8 @@ public class GameManager : MonoBehaviour
     void Setup()
     {
         uiManager.Setup();
-        tankManager.CreateTankOnTerrain();
+        tank0Manager.CreateTankOnTerrain();
+        tank1Manager.CreateTankOnTerrain();
     }
 
     public void DebugAction() {
@@ -41,15 +49,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void Fire() {
-        tankManager.Fire();
+        tank0Manager.Fire();
     }
 
     public void SetTargetDelta(Tanks.Target targetDelta) {
-        tankManager.SetTargetDelta(targetDelta);
+        tank0Manager.SetTargetDelta(targetDelta);
     }
 
     public void ApplyTargetDelta() {
-        tankManager.ApplyTargetDelta();
+        tank0Manager.ApplyTargetDelta();
     }
 
     void Update()
