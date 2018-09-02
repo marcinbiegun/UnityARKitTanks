@@ -10,7 +10,7 @@ public class TankManager : MonoBehaviour {
     private GameObject tankBarrel;
     private GameObject projectileSpawnPoint;
 
-    public Tanks.Target target = new Tanks.Target(0f, 0f, 0f);
+    public Tanks.Target target = new Tanks.Target(0f, 0f, 0.3f);
     public Tanks.Target targetDelta = new Tanks.Target(0f, 0f, 0f);
 
     // Use this for initialization
@@ -20,18 +20,18 @@ public class TankManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         DisplayTargetOnModel();
-        DisplayTargetOnUI();
     }
 
-    public void CreateTankOnTerrain() {
+    public void CreateTankOnTerrain(int tankId) {
         if (tank != null) {
             throw new UnityException("Tank is already spawned");
         }
         var tankPosition = GameManager.instance.terrainManager.RandomPosition();
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
+        tank.GetComponent<TankController>().tankId = tankId;
 
         tankBarrel = tank.transform.Find("Barrel").gameObject;
-        if (tankBarrel == null) 
+        if (tankBarrel == null)
             throw new UnityException("Unable to find tank's barrel");
 
         projectileSpawnPoint = tank.transform.Find("Barrel/ProjectileSpawnPoint").gameObject;
@@ -49,11 +49,23 @@ public class TankManager : MonoBehaviour {
 
     public void SetTargetDelta(Tanks.Target newTargetDelta) {
         targetDelta = newTargetDelta;
+        DisplayTargetOnUI();
     }
 
     public void ApplyTargetDelta() {
         target += targetDelta;
         targetDelta = new Tanks.Target(0f, 0f, 0f);
+    }
+
+    public void Explode() {
+        tank.GetComponent<BoxCollider>().enabled = false;
+        foreach (Transform t in tank.GetComponentsInChildren<Transform>()) {
+            Renderer rend = t.GetComponent<Renderer>();
+            if (rend == null)
+                continue;
+            BoxCollider boxCollider = t.gameObject.AddComponent<BoxCollider>() as BoxCollider;
+            Rigidbody rigidbody = t.gameObject.AddComponent<Rigidbody>() as Rigidbody;
+        }
     }
 
     void DisplayTargetOnModel() {

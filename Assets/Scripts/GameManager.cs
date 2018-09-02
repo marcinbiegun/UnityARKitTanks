@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
-
+    public int activeTank;
     public TankManager tank0Manager;
     public TankManager tank1Manager;
     public TerrainManager terrainManager;
     public UIManager uiManager;
 
-    void Awake()
-    {
+    void Awake() {
         Application.targetFrameRate = 60;
 
         // Make self a publicly available singleton
-        if (instance == null) { instance = this; }
-        else if (instance != this) { Destroy(gameObject); }
+        if (instance == null) { instance = this; } else if (instance != this) { Destroy(gameObject); }
 
         // Never destroy gameManager (on scene changes)
         DontDestroyOnLoad(gameObject);
@@ -37,31 +34,62 @@ public class GameManager : MonoBehaviour
         Setup();
     }
 
-    void Setup()
-    {
+    void Setup() {
+        activeTank = 0;
         uiManager.Setup();
-        tank0Manager.CreateTankOnTerrain();
-        tank1Manager.CreateTankOnTerrain();
+        uiManager.DisplayActiveTank(activeTank);
+        tank0Manager.CreateTankOnTerrain(0);
+        tank1Manager.CreateTankOnTerrain(1);
     }
 
     public void DebugAction() {
+        uiManager.DisplayWinMessage(1);
         Debug.Log("Debug action!");
     }
 
     public void Fire() {
-        tank0Manager.Fire();
+        if (ActiveTankManager())
+            ActiveTankManager().Fire();
     }
 
     public void SetTargetDelta(Tanks.Target targetDelta) {
-        tank0Manager.SetTargetDelta(targetDelta);
+        if (ActiveTankManager())
+            ActiveTankManager().SetTargetDelta(targetDelta);
     }
 
     public void ApplyTargetDelta() {
-        tank0Manager.ApplyTargetDelta();
+        if (ActiveTankManager())
+            ActiveTankManager().ApplyTargetDelta();
     }
 
-    void Update()
-    {
-
+    public void ProjectileMiss() {
+        // Activate another tank
+        activeTank = activeTank == 0 ? 1 : 0;
+        uiManager.DisplayActiveTank(activeTank);
     }
+
+    public void ProjectileHitTank(int tankId) {
+        // Deactivate tank managers
+        activeTank = -1;
+        GetTankManager(tankId).Explode();
+        int winnerTankId = tankId == 1 ? 0 : 1;
+        uiManager.DisplayWinMessage(winnerTankId);
+    }
+
+    TankManager ActiveTankManager() {
+        if (activeTank == 0)
+            return tank0Manager;
+        if (activeTank == 1)
+            return tank1Manager;
+        return null;
+    }
+
+    TankManager GetTankManager(int tankId) {
+        if (tankId == 0)
+            return tank0Manager;
+        if (tankId == 1)
+            return tank1Manager;
+        throw new UnityException("Bad tank id");
+    }
+
 }
