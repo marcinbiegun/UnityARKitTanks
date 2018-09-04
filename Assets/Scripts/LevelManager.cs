@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour {
     public UIManager uiManager;
 
     void Awake() {
-        Application.targetFrameRate = 60;
-
         // Make self a publicly available singleton
         if (instance == null) { instance = this; } else if (instance != this) { Destroy(gameObject); }
 
@@ -71,6 +69,7 @@ public class LevelManager : MonoBehaviour {
         // Activate another tank
         activeTank = activeTank == 0 ? 1 : 0;
         uiManager.DisplayActiveTank(activeTank);
+        ActiveTankManager().UnlockFire();
     }
 
     public void ProjectileHitTank(int tankId) {

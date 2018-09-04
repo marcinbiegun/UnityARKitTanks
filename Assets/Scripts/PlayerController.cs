@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour {
     void Start () {
 	}
 
-    // Use buttons
-    void Update_disabled() {
+    void Update() {
         if (Input.GetButtonDown("Fire1"))
             EnterRotationControl();
         if (Input.GetButtonDown("Fire2"))

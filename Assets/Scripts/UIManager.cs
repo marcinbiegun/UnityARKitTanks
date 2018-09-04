@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
     public Button debugButton;
+    public Button fireButton;
     public Text rotationValue;
     public Text angleValue;
     public Text powerValue;
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour {
 
     public void Setup() {
         debugButton.onClick.AddListener(LevelManager.instance.DebugAction);
+        debugButton.onClick.AddListener(LevelManager.instance.Fire);
         winValue.gameObject.SetActive(false);
     }
 

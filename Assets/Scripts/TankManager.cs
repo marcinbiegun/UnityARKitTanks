@@ -9,9 +9,12 @@ public class TankManager : MonoBehaviour {
     private GameObject tank;
     private GameObject tankBarrel;
     private GameObject projectileSpawnPoint;
+    private bool fireLocked = false;
 
     public Tanks.Target target = new Tanks.Target(0f, 0f, 0.3f);
     public Tanks.Target targetDelta = new Tanks.Target(0f, 0f, 0f);
+
+
 
     // Use this for initialization
     void Start() {
@@ -42,9 +45,16 @@ public class TankManager : MonoBehaviour {
     }
 
     public void Fire() {
+        if (fireLocked)
+            return;
         var shotTransform = projectileSpawnPoint.transform;
         GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation);
         newProjectile.GetComponent<Rigidbody>().AddForce(shotTransform.forward * target.power * -1000f);
+        fireLocked = true;
+    }
+
+    public void UnlockFire() {
+        fireLocked = false;
     }
 
     public void SetTargetDelta(Tanks.Target newTargetDelta) {
