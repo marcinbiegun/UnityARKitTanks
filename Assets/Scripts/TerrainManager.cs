@@ -19,6 +19,15 @@ public class TerrainManager : MonoBehaviour {
     public void CreateTerrain() {
         terrain = Instantiate(terrainPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         terrain.transform.SetParent(transform);
+        terrain.GetComponent<PerlinTerrain>().GeneratePerlinHeights(222f);
+
+        // Center terrain around 0,0,0 coords
+        var terrainSize = terrain.GetComponent<Terrain>().terrainData.size;
+        terrain.transform.position = new Vector3(
+            terrainSize.x * -0.5f,
+            0f,
+            terrainSize.z * -0.5f
+        );
     }
 
     public Vector3 RandomPosition() {
@@ -27,6 +36,7 @@ public class TerrainManager : MonoBehaviour {
         float posX = Random.Range(bounds.min.x, bounds.max.x);
         float posZ = Random.Range(bounds.min.z, bounds.max.z);
         float posY = terrainComp.SampleHeight(new Vector3(posX, 0, posZ));
-        return new Vector3(posX, posY, posZ);
+
+        return new Vector3(posX, posY, posZ) + terrain.transform.position;
     }
 }

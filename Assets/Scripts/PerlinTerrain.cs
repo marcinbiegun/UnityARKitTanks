@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class PerlinTerrain : MonoBehaviour {
 
     public float noiseScale = 1.0f;
@@ -19,14 +18,17 @@ public class PerlinTerrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (rebuild != rebuildWas) {
-            GeneratePerlinHeights();
-        }
+        //if (rebuild != rebuildWas) {
+        //    GeneratePerlinHeights();
+        //}
         rebuildWas = rebuild;
 	}
 
-    void GeneratePerlinHeights() {
+    public void GeneratePerlinHeights(float seed) {
         Debug.Log("Building terrain");
+
+        float perlinSeedX = noiseSeed + seed;
+        float perlinSeedY = -(noiseSeed + seed);
 
         var terrain = this.GetComponent<Terrain>();
         var width = terrain.terrainData.heightmapWidth;
@@ -36,8 +38,8 @@ public class PerlinTerrain : MonoBehaviour {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 heights[x, y] = Mathf.PerlinNoise(
-                    ((float)x / (float)width * noiseScale) + noiseSeed,
-                    ((float)y / (float)height * noiseScale) - noiseSeed
+                    ((float)x / (float)width * noiseScale) + perlinSeedX,
+                    ((float)y / (float)height * noiseScale) - perlinSeedY
                 ) * noiseHeight;
             }
         }
