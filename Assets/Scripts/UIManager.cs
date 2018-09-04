@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     public Canvas canvas;
     public Button debugButton;
+    public Button calibrateUpButton;
+    public Button calibrateDownButton;
+    public Button calibrateLargerButton;
+    public Button calibrateSmallerButton;
     public Button fireButton;
     public Text rotationValue;
     public Text angleValue;
@@ -16,6 +20,10 @@ public class UIManager : MonoBehaviour {
     public void Setup() {
         debugButton.onClick.AddListener(LevelManager.instance.DebugAction);
         fireButton.onClick.AddListener(LevelManager.instance.Fire);
+        calibrateUpButton.onClick.AddListener(LevelManager.instance.MoveUp);
+        calibrateDownButton.onClick.AddListener(LevelManager.instance.MoveDown);
+        calibrateLargerButton.onClick.AddListener(LevelManager.instance.ScaleUp);
+        calibrateSmallerButton.onClick.AddListener(LevelManager.instance.ScaleDown);
         winValue.gameObject.SetActive(false);
     }
 

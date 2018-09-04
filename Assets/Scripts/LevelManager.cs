@@ -81,6 +81,22 @@ public class LevelManager : MonoBehaviour {
         uiManager.DisplayWinMessage(winnerTankId);
     }
 
+    public void MoveUp() {
+        transform.position += new Vector3(0f, 0.1f, 0f);
+    }
+
+    public void MoveDown() {
+        transform.position -= new Vector3(0f, 0.1f, 0f);
+    }
+
+    public void ScaleUp() {
+        transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
+    public void ScaleDown() {
+        transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+    }
+
     private void SetActiveTank(int tankId) {
         activeTank = tankId;
         tank0Manager.HideMarker();

@@ -19,8 +19,7 @@ namespace UnityEngine.XR.iOS
             unityARAnchorManager.Destroy ();
         }
 
-        void OnGUI()
-        {
+        void OnGUI() {
 			IEnumerable<ARPlaneAnchorGameObject> arpags = unityARAnchorManager.GetCurrentPlaneAnchors ();
 			foreach(var planeAnchor in arpags)
 			{
@@ -29,6 +28,11 @@ namespace UnityEngine.XR.iOS
                 //GUI.Box(new Rect(100, 200, 800, 60), string.Format ("Extent: x:{0}, y:{1}, z:{2}", ap.extent.x, ap.extent.y, ap.extent.z));
             }
         }
-	}
+
+        public ICollection<ARPlaneAnchorGameObject> Planes()  {
+            ICollection<ARPlaneAnchorGameObject> arpags = unityARAnchorManager.GetCurrentPlaneAnchors();
+            return arpags;
+        }
+    }
 }
 

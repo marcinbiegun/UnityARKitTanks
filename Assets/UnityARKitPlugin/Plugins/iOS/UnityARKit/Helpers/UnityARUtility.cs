@@ -36,6 +36,11 @@ namespace UnityEngine.XR.iOS
 
 		public static GameObject UpdatePlaneWithAnchorTransform(GameObject plane, ARPlaneAnchor arPlaneAnchor)
 		{
+            // TANKS CODE
+            if (ARKitGameManager.instance.gameMode != ARKitGameManager.GameMode.Calibration) {
+                return plane;
+            }
+            /////
 			
 			//do coordinate conversion from ARKit to Unity
 			plane.transform.position = UnityARMatrixOps.GetPosition (arPlaneAnchor.transform);
