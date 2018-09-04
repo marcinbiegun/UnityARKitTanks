@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour {
 
-    public GameObject calibrationButton;
-    public GameObject gameButton;
+    public Button calibrationButton;
+    public Button gameButton;
+    public Text debugText;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Setup() {
+        calibrationButton.onClick.AddListener(ARKitGameManager.instance.SetCalibrationMode);
+        gameButton.onClick.AddListener(ARKitGameManager.instance.SetGameMode);
+    }
+
+    public void SetDebugText(string text) {
+        debugText.text = text;
+    }
 }

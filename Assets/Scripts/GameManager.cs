@@ -12,14 +12,17 @@ public class GameManager : MonoBehaviour {
         Application.targetFrameRate = 60;
         // Make self a publicly available singleton
         if (instance == null) { instance = this; } else if (instance != this) { Destroy(gameObject); }
-        // Never destroy gameManager (on scene changes)
-        DontDestroyOnLoad(gameObject);
 
         levelManager = Instantiate(levelManagerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        levelManager.name = "LevelManager";
+        levelManager.transform.SetParent(null);
+
+        // Never destroy gameManager (on scene changes)
+        DontDestroyOnLoad(gameObject);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

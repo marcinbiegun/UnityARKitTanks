@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+    public Canvas canvas;
     public Button debugButton;
     public Button fireButton;
     public Text rotationValue;
@@ -14,8 +15,12 @@ public class UIManager : MonoBehaviour {
 
     public void Setup() {
         debugButton.onClick.AddListener(LevelManager.instance.DebugAction);
-        debugButton.onClick.AddListener(LevelManager.instance.Fire);
+        fireButton.onClick.AddListener(LevelManager.instance.Fire);
         winValue.gameObject.SetActive(false);
+    }
+
+    public void SetCanvasScale(float scale) {
+        canvas.GetComponent<Canvas>().scaleFactor = scale;
     }
 
     public void DisplayTarget(Tanks.Target target) {

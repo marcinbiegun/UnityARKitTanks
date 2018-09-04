@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour {
     public UIManager uiManager;
 
     void Awake() {
+        Debug.Log("LEVEL MANAGE AWAKE - initalizing game");
         // Make self a publicly available singleton
         if (instance == null) { instance = this; } else if (instance != this) { Destroy(gameObject); }
 

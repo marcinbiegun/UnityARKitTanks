@@ -24,21 +24,32 @@ public class ARKitGameManager : MonoBehaviour {
 
         // Set managers
         gameUIManager = GetComponent<GameUIManager>();
+        gameUIManager.Setup();
+
+        // Initialize level manager (the game)
+        levelManager = Instantiate(levelManagerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        levelManager.name = "LevelManager";
+        levelManager.transform.SetParent(transform.root);
+        levelManager.GetComponent<UIManager>().SetCanvasScale(2.0f);
 
         // Go to calibration mode
-        CalibrationMode();
+        SetCalibrationMode();
     }
 
     // Update is called once per frame
     void Update() {
     }
 
-    public void CalibrationMode() {
+    public void SetCalibrationMode() {
+        Debug.Log("SetCalibraitonmode");
         gameMode = GameMode.Calibration;
+        gameUIManager.SetDebugText("Calibration mode");
     }
 
-    public void EnableGameMode() {
+    public void SetGameMode() {
+        Debug.Log("Set GAME mode");
         gameMode = GameMode.Game;
+        gameUIManager.SetDebugText("Game mode");
     }
 }
 

@@ -29,6 +29,7 @@ public class TankManager : MonoBehaviour {
             throw new UnityException("Tank is already spawned");
         }
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
+        tank.transform.SetParent(transform);
         tank.GetComponent<TankController>().tankId = tankId;
 
         tankBarrel = tank.transform.Find("Barrel").gameObject;
@@ -60,6 +61,7 @@ public class TankManager : MonoBehaviour {
             return;
         var shotTransform = projectileSpawnPoint.transform;
         GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation);
+        newProjectile.transform.SetParent(transform);
         newProjectile.GetComponent<Rigidbody>().AddForce(shotTransform.forward * target.power * -1000f);
         fireLocked = true;
     }
