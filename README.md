@@ -1,9 +1,7 @@
 # UnityARKitTanks
 
-Tanks game for iOS using ARKit.
-
-Work in progress.
+Tanks game using ARKit.
 
 A preview of the current build:
 
-[![UnityARKitTanks](https://i.ytimg.com/vi/m3osagqS4vw/hqdefault.jpg)](https://www.youtube.com/watch?v=m3osagqS4vw)
+[![UnityARKitTanks](https://i.ytimg.com/vi/4hiz7sZz_W4/hqdefault.jpg)](https://www.youtube.com/watch?v=4hiz7sZz_W4)
