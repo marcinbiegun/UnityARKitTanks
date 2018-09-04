@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour {
 
+    public GameObject terrainPrefab;
     public GameObject terrain;
 
 	// Use this for initialization
@@ -14,6 +15,11 @@ public class TerrainManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
+
+    public void CreateTerrain() {
+        terrain = Instantiate(terrainPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        terrain.transform.SetParent(transform);
+    }
 
     public Vector3 RandomPosition() {
         var terrainComp = terrain.GetComponent<Terrain>();

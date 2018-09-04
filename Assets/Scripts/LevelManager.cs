@@ -33,11 +33,12 @@ public class LevelManager : MonoBehaviour {
     }
 
     void Setup() {
-        activeTank = 0;
         uiManager.Setup();
         uiManager.DisplayActiveTank(activeTank);
-        tank0Manager.CreateTankOnTerrain(0);
-        tank1Manager.CreateTankOnTerrain(1);
+        terrainManager.CreateTerrain();
+        tank0Manager.CreateTankOnTerrain(0, terrainManager.RandomPosition());
+        tank1Manager.CreateTankOnTerrain(1, terrainManager.RandomPosition());
+        SetActiveTank(0);
     }
 
     public void DebugAction() {
@@ -67,9 +68,8 @@ public class LevelManager : MonoBehaviour {
 
     public void ProjectileMiss() {
         // Activate another tank
-        activeTank = activeTank == 0 ? 1 : 0;
-        uiManager.DisplayActiveTank(activeTank);
-        ActiveTankManager().UnlockFire();
+        int nexActiveTankId = activeTank == 0 ? 1 : 0;
+        SetActiveTank(nexActiveTankId);
     }
 
     public void ProjectileHitTank(int tankId) {
@@ -78,6 +78,15 @@ public class LevelManager : MonoBehaviour {
         GetTankManager(tankId).Explode();
         int winnerTankId = tankId == 1 ? 0 : 1;
         uiManager.DisplayWinMessage(winnerTankId);
+    }
+
+    private void SetActiveTank(int tankId) {
+        activeTank = tankId;
+        tank0Manager.HideMarker();
+        tank1Manager.HideMarker();
+        ActiveTankManager().ShowMarker();
+        ActiveTankManager().UnlockFire();
+        uiManager.DisplayActiveTank(tankId);
     }
 
     TankManager ActiveTankManager() {

@@ -8,13 +8,12 @@ public class TankManager : MonoBehaviour {
     public GameObject projectilePrefab;
     private GameObject tank;
     private GameObject tankBarrel;
+    private GameObject tankMarker;
     private GameObject projectileSpawnPoint;
     private bool fireLocked = false;
 
     public Tanks.Target target = new Tanks.Target(0f, 0f, 0.3f);
     public Tanks.Target targetDelta = new Tanks.Target(0f, 0f, 0f);
-
-
 
     // Use this for initialization
     void Start() {
@@ -25,11 +24,10 @@ public class TankManager : MonoBehaviour {
         DisplayTargetOnModel();
     }
 
-    public void CreateTankOnTerrain(int tankId) {
+    public void CreateTankOnTerrain(int tankId, Vector3 tankPosition) {
         if (tank != null) {
             throw new UnityException("Tank is already spawned");
         }
-        var tankPosition = LevelManager.instance.terrainManager.RandomPosition();
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
         tank.GetComponent<TankController>().tankId = tankId;
 
@@ -41,7 +39,20 @@ public class TankManager : MonoBehaviour {
         if (projectileSpawnPoint == null)
             throw new UnityException("Unable to find tank's projectile spawn point");
 
+        tankMarker = tank.transform.Find("Marker").gameObject;
+        if (tankMarker == null)
+            throw new UnityException("Unable to find tank's marker");
+        tankMarker.SetActive(false);
+
         ColorizeTank();
+    }
+
+    public void ShowMarker() {
+        tankMarker.SetActive(true);
+    }
+
+    public void HideMarker() {
+        tankMarker.SetActive(false);
     }
 
     public void Fire() {
