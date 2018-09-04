@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     void Start () {
 	}
 
-    void Update() {
+    // Use buttons
+    void Update_disabled() {
         if (Input.GetButtonDown("Fire1"))
             EnterRotationControl();
         if (Input.GetButtonDown("Fire2"))
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour {
             ReleaseControl();
         }
         if (Input.GetKeyDown("space"))
-            GameManager.instance.Fire();
+            LevelManager.instance.Fire();
         if (Input.GetKeyDown("escape"))
             Application.Quit();
 
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 
     public void ReleaseControl() {
         controlMode = ControlMode.None;
-        GameManager.instance.ApplyTargetDelta();
+        LevelManager.instance.ApplyTargetDelta();
     }
 
     void PublishControlDeltas() {
@@ -55,12 +56,12 @@ public class PlayerController : MonoBehaviour {
                 float rotation = mouseDelta.x / 10f;
                 float angle = mouseDelta.y / 10f;
                 var rotationTargetDelta = new Tanks.Target(rotation, angle, 0f);
-                GameManager.instance.SetTargetDelta(rotationTargetDelta);
+                LevelManager.instance.SetTargetDelta(rotationTargetDelta);
                 break;
             case ControlMode.Power:
                 float power = (mouseDelta.x + mouseDelta.y) / 100f;
                 var powerTargetDelta = new Tanks.Target(0f, 0f, power);
-                GameManager.instance.SetTargetDelta(powerTargetDelta);
+                LevelManager.instance.SetTargetDelta(powerTargetDelta);
                 break;
         }
     }

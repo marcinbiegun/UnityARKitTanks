@@ -26,7 +26,7 @@ public class TankManager : MonoBehaviour {
         if (tank != null) {
             throw new UnityException("Tank is already spawned");
         }
-        var tankPosition = GameManager.instance.terrainManager.RandomPosition();
+        var tankPosition = LevelManager.instance.terrainManager.RandomPosition();
         tank = Instantiate(tankPrefab, tankPosition, Quaternion.identity);
         tank.GetComponent<TankController>().tankId = tankId;
 
@@ -49,6 +49,11 @@ public class TankManager : MonoBehaviour {
 
     public void SetTargetDelta(Tanks.Target newTargetDelta) {
         targetDelta = newTargetDelta;
+        DisplayTargetOnUI();
+    }
+
+    public void AddTargetDelta(Tanks.Target newTargetDelta) {
+        targetDelta += newTargetDelta;
         DisplayTargetOnUI();
     }
 
@@ -92,7 +97,7 @@ public class TankManager : MonoBehaviour {
     }
 
     void DisplayTargetOnUI() {
-        GameManager.instance.uiManager.DisplayTarget(target + targetDelta);
+        LevelManager.instance.uiManager.DisplayTarget(target + targetDelta);
     }
 
     void ColorizeTank() {

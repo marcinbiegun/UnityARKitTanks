@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-    public static GameManager instance = null;
+public class LevelManager : MonoBehaviour {
+    public static LevelManager instance = null;
     public int activeTank;
     public TankManager tank0Manager;
     public TankManager tank1Manager;
@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour {
     public void Fire() {
         if (ActiveTankManager())
             ActiveTankManager().Fire();
+    }
+
+    public void AddTargetDelta(Tanks.Target targetDelta) {
+        if (ActiveTankManager())
+            ActiveTankManager().AddTargetDelta(targetDelta);
     }
 
     public void SetTargetDelta(Tanks.Target targetDelta) {

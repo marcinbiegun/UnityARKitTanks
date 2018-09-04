@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour {
     public Text winValue;
 
     public void Setup() {
-        debugButton.onClick.AddListener(GameManager.instance.DebugAction);
+        debugButton.onClick.AddListener(LevelManager.instance.DebugAction);
         winValue.gameObject.SetActive(false);
     }
 

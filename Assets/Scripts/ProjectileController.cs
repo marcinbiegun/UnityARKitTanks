@@ -35,16 +35,16 @@ public class ProjectileController : MonoBehaviour {
     }
 
     void OnTerrainCollision() {
-        GameManager.instance.ProjectileMiss();
+        LevelManager.instance.ProjectileMiss();
     }
 
     void OnTankCollision(GameObject tank) {
         int tankId = tank.GetComponent<TankController>().tankId;
-        GameManager.instance.ProjectileHitTank(tankId);
+        LevelManager.instance.ProjectileHitTank(tankId);
     }
 
     void OnWorldBorderCollision() {
-        GameManager.instance.ProjectileMiss();
+        LevelManager.instance.ProjectileMiss();
         Destroy(gameObject);
     }
 }
