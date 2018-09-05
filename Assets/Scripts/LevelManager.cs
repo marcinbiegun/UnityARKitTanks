@@ -100,11 +100,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void ScaleUp() {
-        transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = transform.localScale * 1.1f;
     }
 
     public void ScaleDown() {
-        transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = transform.localScale * 0.9f;
     }
 
     private void SetActiveTank(int tankId) {

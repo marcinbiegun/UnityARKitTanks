@@ -19,13 +19,14 @@ public class TerrainManager : MonoBehaviour {
         var terrainMesh = terrain.transform.GetChild(0);
         var meshFilter = terrainMesh.GetComponent<MeshFilter>().mesh;
         var bounds = meshFilter.bounds;
-        var randomX = Random.Range(bounds.min.x, bounds.max.x);
-        var randomZ = Random.Range(bounds.min.z, bounds.max.z);
+        var scaleX = terrainMesh.transform.localScale.x / transform.localScale.x;
+        var scaleY = terrainMesh.transform.localScale.y / transform.localScale.y;
+        var randomX = Random.Range(bounds.min.x / scaleX, bounds.max.x / scaleX);
+        var randomZ = Random.Range(bounds.min.z / scaleY, bounds.max.z / scaleY);
 
-        //Debug.Log(randomX);
+
+        //Debug.Log("X is from " + bounds.min.x + " to " + bounds.max.x);
         //Debug.Log(randomZ);
-        //randomX = 0.1f;
-        //randomZ = -0.1f;
 
         // FIXME layer not working, dunno why
         //var layerMask = LayerMask.NameToLayer("Terrain");
@@ -33,20 +34,13 @@ public class TerrainManager : MonoBehaviour {
         RaycastHit hit;
         var rayStart = new Vector3(randomX, 10f, randomZ);
 
-        Debug.Log("random X is " + randomX);
         var rayDir = Vector3.down;
-
-        Debug.DrawRay(rayStart, rayDir * 100f, Color.yellow);
 
         //if (Physics.Raycast(rayStart, rayDir, out hit, 1000f, layerMask)) {
         if (Physics.Raycast(rayStart, rayDir, out hit, 1000f)) {
-            //    Debug.Log("Did Hit");
             var randomPosition = hit.point;
-            Debug.Log("random position is " + randomPosition);
             return randomPosition;
         } else {
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
             throw new UnityException("Failed to find a random point on the terrain");
         }
 

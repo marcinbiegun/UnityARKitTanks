@@ -24,7 +24,7 @@ public class TankTargetButton : MonoBehaviour {
                 angle += 0.5f * directionMultiplier;
                 break;
             case TargetVariable.Power:
-                power += 0.01f * directionMultiplier;
+                power += 0.005f * directionMultiplier;
                 break;
         }
 
