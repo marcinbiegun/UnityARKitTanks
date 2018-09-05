@@ -15,11 +15,17 @@ public class TankManager : MonoBehaviour {
     public Tanks.Target target = new Tanks.Target(0f, 0f, 0.3f);
     public Tanks.Target targetDelta = new Tanks.Target(0f, 0f, 0f);
 
-    // Use this for initialization
-    void Start() {
+    private AudioSource audioSource;
+    private AudioClip explosionClip;
+    private AudioClip fireClip;
+
+    private void Awake() {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.Stop();
+        explosionClip = (AudioClip)Resources.Load("explosion");
+        fireClip = (AudioClip)Resources.Load("shot");
     }
 
-    // Update is called once per frame
     void Update() {
         DisplayTargetOnModel();
     }
@@ -74,6 +80,8 @@ public class TankManager : MonoBehaviour {
         GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation, transform);
         newProjectile.GetComponent<Rigidbody>().AddForce(shotTransform.forward * target.power * -1000f);
         fireLocked = true;
+        audioSource.clip = fireClip;
+        audioSource.Play();
     }
 
     public void UnlockFire() {
@@ -104,6 +112,8 @@ public class TankManager : MonoBehaviour {
             BoxCollider boxCollider = t.gameObject.AddComponent<BoxCollider>() as BoxCollider;
             Rigidbody rigidbody = t.gameObject.AddComponent<Rigidbody>() as Rigidbody;
         }
+        audioSource.clip = explosionClip;
+        audioSource.Play();
     }
 
     void DisplayTargetOnModel() {

@@ -5,14 +5,17 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour {
 
     private bool hasCollided = false;
+    private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.clip = (AudioClip)Resources.Load("small_hit");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -31,10 +34,13 @@ public class ProjectileController : MonoBehaviour {
             OnTankCollision(col.gameObject);
         } else if (col.gameObject.layer == worldBorderLayer) {
             OnWorldBorderCollision();
+        } else {
+            OnTerrainCollision(); // Other projectiles, etc. do nothing
         }
     }
 
     void OnTerrainCollision() {
+        audioSource.Play();
         LevelManager.instance.ProjectileMiss();
     }
 
@@ -44,6 +50,7 @@ public class ProjectileController : MonoBehaviour {
     }
 
     void OnWorldBorderCollision() {
+        audioSource.Play();
         LevelManager.instance.ProjectileMiss();
         Destroy(gameObject);
     }
