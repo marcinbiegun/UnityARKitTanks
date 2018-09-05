@@ -1,7 +1,7 @@
 # UnityARKitTanks
 
-Tanks game using ARKit.
+A classing tanks game using ARKit.
 
 A preview of the current build:
 
-[![UnityARKitTanks](https://i.ytimg.com/vi/4hiz7sZz_W4/hqdefault.jpg)](https://www.youtube.com/watch?v=4hiz7sZz_W4)
+[![UnityARKitTanks](https://i.ytimg.com/vi/JZhZX26N3vs/hqdefault.jpg)](https://www.youtube.com/watch?v=JZhZX26N3vs)
