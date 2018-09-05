@@ -1109,7 +1109,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Debug Action!
+  m_Text: Restart
 --- !u!114 &114223933206178764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2f43dc49b4d4050890eca40cc3a139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainPrefab: {fileID: 1281905544843260, guid: b99f0bcebe2394f37a3c80787c606a93,
+  terrainPrefab: {fileID: 1707118947995852, guid: bbe4412828b804f6283aa9d94fc13947,
     type: 2}
   terrain: {fileID: 0}
 --- !u!114 &114644331842321806

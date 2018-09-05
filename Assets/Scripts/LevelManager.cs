@@ -36,10 +36,20 @@ public class LevelManager : MonoBehaviour {
     void Setup() {
         uiManager.Setup();
         uiManager.DisplayActiveTank(activeTank);
-        terrainManager.CreateTerrain();
+        terrainManager.CreateTerrain(10f);
         tank0Manager.CreateTankOnTerrain(0, terrainManager.RandomPosition());
         tank1Manager.CreateTankOnTerrain(1, terrainManager.RandomPosition());
         SetActiveTank(0);
+    }
+
+    public void Restart() {
+        tank0Manager.DestroyTank();
+        tank1Manager.DestroyTank();
+        tank0Manager.CreateTankOnTerrain(0, terrainManager.RandomPosition());
+        tank1Manager.CreateTankOnTerrain(1, terrainManager.RandomPosition());
+        uiManager.HideWinMessage();
+        SetActiveTank(0);
+        uiManager.DisplayActiveTank(activeTank);
     }
 
     public void DebugAction() {

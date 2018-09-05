@@ -48,6 +48,17 @@ public class TankManager : MonoBehaviour {
         ColorizeTank();
     }
 
+    public void DestroyTank() {
+        Destroy(tank);
+        tank = null;
+        tankBarrel = null;
+        tankMarker = null;
+        projectileSpawnPoint = null;
+        fireLocked = false;
+        target = new Tanks.Target(0f, 0f, 0f);
+        targetDelta = new Tanks.Target(0f, 0f, 0f);
+    }
+
     public void ShowMarker() {
         tankMarker.SetActive(true);
     }
@@ -60,8 +71,7 @@ public class TankManager : MonoBehaviour {
         if (fireLocked)
             return;
         var shotTransform = projectileSpawnPoint.transform;
-        GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation);
-        newProjectile.transform.SetParent(transform);
+        GameObject newProjectile = Instantiate(projectilePrefab, shotTransform.position, shotTransform.rotation, transform);
         newProjectile.GetComponent<Rigidbody>().AddForce(shotTransform.forward * target.power * -1000f);
         fireLocked = true;
     }

@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour {
     public Text winValue;
 
     public void Setup() {
-        debugButton.onClick.AddListener(LevelManager.instance.DebugAction);
+        debugButton.onClick.AddListener(LevelManager.instance.Restart);
         fireButton.onClick.AddListener(LevelManager.instance.Fire);
         calibrateUpButton.onClick.AddListener(LevelManager.instance.MoveUp);
         calibrateDownButton.onClick.AddListener(LevelManager.instance.MoveDown);
@@ -45,5 +45,9 @@ public class UIManager : MonoBehaviour {
         string message = "Player " + winnerId + " is the winner!";
         winValue.text = message;
         winValue.gameObject.SetActive(true);
+    }
+
+    public void HideWinMessage() {
+        winValue.gameObject.SetActive(false);
     }
 }
